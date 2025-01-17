@@ -271,25 +271,20 @@ export const MainPage = () => {
 
       {/* Mobile Menu with Sliding Effect from the Right */}
       <div
-        className={`fixed top-0 right-0 bg-black bg-opacity-50 w-full h-full z-40 transition-all duration-300 ease-in-out ${
+        className={`${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        } fixed top-0 right-0 bg-black bg-opacity-50 w-full h-full z-40 transition-all duration-300 ease-in-out`}
         onClick={() => setIsMenuOpen(false)}
       >
         <div
-          className={`absolute top-0 right-0 h-full w-4/5 bg-white text-black p-6 transform transition-transform duration-300 ease-in-out ${
+          className={`w-4/5 bg-white text-black p-6 absolute top-0 right-0 h-full transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
-          onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
           <div className="flex justify-end">
-            <button
-              onClick={toggleMenu}
-              aria-label="Close Menu"
-              className="text-black text-3xl"
-            >
-              <IoCloseSharp />
+            <button onClick={toggleMenu}>
+              <IoCloseSharp className="text-black text-3xl" />
             </button>
           </div>
 
@@ -297,19 +292,19 @@ export const MainPage = () => {
           <nav className="flex flex-col items-center space-y-10 mt-28">
             <button
               onClick={() => openModal("signin")}
-              className="w-full py-3 px-6 text-xl font-medium text-white bg-blue-500 rounded-lg shadow-lg shadow-blue-500/50 hover:bg-blue-600 transition-all duration-200"
+              className="text-xl font-medium bg-blue-500 text-white py-3 px-6 w-full rounded-lg shadow-lg shadow-blue-500/50 hover:bg-blue-600 transition-all duration-200"
             >
               Sign In
             </button>
             <button
               onClick={() => openModal("signup")}
-              className="w-full py-3 px-6 text-xl font-medium text-white bg-blue-500 rounded-lg shadow-lg shadow-blue-500/50 hover:bg-blue-600 transition-all duration-200"
+              className="text-xl font-medium bg-blue-500 text-white py-3 px-6 w-full rounded-lg shadow-lg shadow-blue-500/50 hover:bg-blue-600 transition-all duration-200"
             >
               Sign Up
             </button>
             <button
               onClick={toggleMenu}
-              className="flex items-center justify-center w-full py-3 px-6 text-xl font-medium text-white bg-blue-500 rounded-lg shadow-lg shadow-blue-500/50 hover:bg-blue-600 transition-all duration-200"
+              className="flex items-center justify-center text-xl font-medium bg-blue-500 text-white py-3 px-6 w-full rounded-lg shadow-lg shadow-blue-500/50 hover:bg-blue-600 transition-all duration-200"
             >
               Help
               <IoIosHelpCircleOutline className="text-2xl ml-2" />
@@ -319,8 +314,12 @@ export const MainPage = () => {
           {/* Bottom Section */}
           <div className="absolute bottom-8 flex items-center justify-center w-full">
             <div className="flex items-center">
-              <img src={logo} alt="BCP Logo" className="w-10 h-10 mr-2" />
-              <h1 className="text-sm font-semibold text-center">
+              <img
+                src={logo}
+                alt="BCP Logo"
+                className="w-10 h-10 xxsm:ml-[-3em] xsm:mr-2 xsm:ml-[-3rem]"
+              />
+              <h1 className="xxsm:text-xs lg:text-sm font-semibold text-center">
                 Bestlink College of the Philippines
               </h1>
             </div>
