@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .sticky-heading {
+    font-size: 1.2rem;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+  .input-fields {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .add-button {
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+
+@layer components {
+  .sidebar-icon {
+    @apply flex items-center justify-center h-12 w-12 mx-auto hover:bg-blue-700 rounded-lg transition-colors duration-300 relative;
+  }
+
+  .sidebar-tooltip {
+    @apply absolute left-16 w-max px-2 py-1 rounded bg-gray-800 text-white text-sm scale-0 origin-left transition-transform duration-300;
+  }
+
+  .sidebar-icon:hover .sidebar-tooltip {
+    @apply scale-100;
+  }
+}
+
