@@ -215,21 +215,40 @@ export const MainPage = () => {
 
   return (
     <div
-      className="min-h-screen flex flex-col"
+      className="min-h-screen flex flex-col overflow-hidden"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${bg})`,
       }}
     >
       {/* Header */}
-      <header className="bg-opacity-60 bg-gray-800 text-white py-4 shadow-md">
+      <header
+        className="bg-opacity-60 bg-gray-800 text-white py-4 shadow-md animate-fade-in-down"
+        style={{
+          animationDelay: "0.3s",
+          animationDuration: "1s",
+          animationFillMode: "both",
+        }}
+      >
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
             <img
               src={logo}
               alt="BCP Logo"
-              className="xxsm:w-10 xxsm:h-10 md:w-12 md:h-12 mr-5"
+              className="xxsm:w-10 xxsm:h-10 md:w-12 md:h-12 mr-5 animate-fade-in-down"
+              style={{
+                animationDelay: "0.5s",
+                animationDuration: "1s",
+                animationFillMode: "both",
+              }}
             />
-            <h1 className="text-2xl font-bold xxsm:hidden md:block">
+            <h1
+              className="text-2xl font-bold xxsm:hidden md:block animate-fade-in-down"
+              style={{
+                animationDelay: "0.7s",
+                animationDuration: "1s",
+                animationFillMode: "both",
+              }}
+            >
               Bestlink College of the Philippines
             </h1>
           </div>
@@ -330,10 +349,24 @@ export const MainPage = () => {
       {/* Main Content */}
       <main className="flex-grow flex items-center justify-center text-white">
         <div className="text-center px-4 py-8 rounded-lg text-white w-full mx-auto">
-          <h2 className="xxsm:text-xl md:text-4xl font-bold mb-4">
+          <h2
+            className="xxsm:text-xl md:text-4xl font-bold mb-4 animate-fade-in-down"
+            style={{
+              animationDelay: "0.5s",
+              animationDuration: "1s",
+              animationFillMode: "both",
+            }}
+          >
             Welcome to the Attendance Monitoring System
           </h2>
-          <p className="xxsm:text-sm md:text-xl mb-6">
+          <p
+            className="xxsm:text-sm md:text-xl mb-6 animate-fade-in-down"
+            style={{
+              animationDelay: "1s",
+              animationDuration: "1s",
+              animationFillMode: "both",
+            }}
+          >
             Efficiently track and manage attendance records. Explore the
             features to manage records, users, and more.
           </p>
@@ -342,7 +375,12 @@ export const MainPage = () => {
           <div className="flex justify-center space-x-6">
             <button
               onClick={() => openModal("signin")}
-              className="bg-blue-500 text-white xxsm:px-3 xxsm:py-2 md:px-6 md:py-3 rounded-lg xxsm:text-sm md:text-lg font-semibold hover:bg-blue-600 transition duration-300"
+              className="bg-blue-500 text-white xxsm:px-3 xxsm:py-2 md:px-6 md:py-3 rounded-lg xxsm:text-sm md:text-lg font-semibold hover:bg-blue-600 transition duration-300 animate-fade-in-up"
+              style={{
+                animationDelay: "1.5s",
+                animationDuration: "1s",
+                animationFillMode: "both",
+              }}
             >
               Get Started
             </button>
@@ -351,7 +389,7 @@ export const MainPage = () => {
       </main>
 
       {/* Footer */}
-      <footer className="py-2 mt-16 bg-gray-800 text-white">
+      <footer className="py-2 mt-16 bg-gray-800 text-white animate-fade-in-up">
         <div className="container mx-auto px-4 flex justify-between items-center">
           {/* Left Section for Text */}
           <p className="xxsm:text-[10px] xsm:text-[11.5px] sm:text-[13px] md:text-sm">
@@ -364,7 +402,7 @@ export const MainPage = () => {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-gray-700 transition duration-300"
+              className="text-white hover:text-gray-700 transition duration-300 animate-fade-in-down"
             >
               <FaLinkedin size={20} />
             </a>
@@ -372,7 +410,7 @@ export const MainPage = () => {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-gray-700 transition duration-300"
+              className="text-white hover:text-gray-700 transition duration-300 animate-fade-in-down"
             >
               <FaGithub size={20} />
             </a>
