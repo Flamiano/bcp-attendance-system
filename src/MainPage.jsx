@@ -45,9 +45,6 @@ export const MainPage = () => {
     }
 
     try {
-      // Avoid rate limits
-      const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await delay(3000);
 
       // Authenticate user
       const { data: signInData, error: signInError } =
