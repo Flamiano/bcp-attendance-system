@@ -455,7 +455,7 @@ export const StudentInformation = () => {
   };
 
   return (
-    <div className="w-full flex justify-center items-center bg-white bg-opacity-70 overflow-auto">
+    <div className="w-full flex justify-center items-center bg-white bg-opacity-70">
       <div className="max-w-[98%] w-full h-full border-none p-10 m-auto">
         {/* Error Modal */}
         {showErrorModal && renderErrorModal()}

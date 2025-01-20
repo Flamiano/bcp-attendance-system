@@ -16,7 +16,6 @@ export const TeacherRouter = () => {
   return (
     <div className="flex h-screen">
       <SideNavbar />
-      <main className="flex-grow bg-gray-100 relative">
         {/* Logout Button positioned in the top-right corner */}
         <button
           onClick={handleLogout}
@@ -34,7 +33,6 @@ export const TeacherRouter = () => {
           {/* Default redirect to Teacher Dashboard if path doesn't match */}
           <Route path="*" element={<TeacherDashboard />} />
         </Routes>
-      </main>
     </div>
   );
 };
