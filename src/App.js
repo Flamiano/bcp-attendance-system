@@ -5,9 +5,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { MainPage } from "./MainPage"; // Your welcome page
-import { TeacherRouter } from "./teachers/TeacherRouter"; // Teacher-specific router
-import { StudentRouter } from "./students/StudentRouter"; // Student-specific router
+import { MainPage } from "./MainPage"; // Main page for sign-in/sign-up
+import { TeacherRouter } from "./teachers/TeacherRouter"; // Teacher router for teacher-specific routes
+import StudentDashboard from "./students/StudentDashboard"; // Student dashboard
 
 const App = () => {
   const [userRole, setUserRole] = useState(null);
@@ -20,19 +20,18 @@ const App = () => {
   }, []);
 
   const signInUser = (role) => {
-    localStorage.setItem("userRole", role); // Persist the role in localStorage
-    setUserRole(role); // Update state
+    localStorage.setItem("userRole", role);
+    setUserRole(role);
   };
 
-  const isAuthenticated = (role) => {
-    return userRole === role; // Check if the role matches the current userRole
-  };
+  const isAuthenticated = (role) => userRole === role;
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<MainPage signInUser={signInUser} />} />
 
+        {/* Teacher Routes */}
         <Route
           path="/teachers/*"
           element={
@@ -40,10 +39,15 @@ const App = () => {
           }
         />
 
+        {/* Student Dashboard Route */}
         <Route
-          path="/students/*"
+          path="/students/dashboard"
           element={
-            isAuthenticated("student") ? <StudentRouter /> : <Navigate to="/" />
+            isAuthenticated("student") ? (
+              <StudentDashboard />
+            ) : (
+              <Navigate to="/" />
+            )
           }
         />
       </Routes>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import supabase from "../supabaseClient"; // Import Supabase client
+import supabase from "../db/supabaseClient"; // Import Supabase client
 import { IoMdPrint } from "react-icons/io";
 import { Footer } from "../components/Footer";
 import bcpLogo from "../assets/bcp-logo.png"; // Adjust the path as needed

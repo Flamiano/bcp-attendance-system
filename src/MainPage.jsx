@@ -5,7 +5,7 @@ import bg from "./assets/bcp-bg.jpg";
 import { FiAlignRight } from "react-icons/fi";
 import { IoCloseSharp } from "react-icons/io5"; // close icon for mobile
 import { IoIosHelpCircleOutline } from "react-icons/io"; // icon for help in mobile
-import supabase from "./supabaseClient";
+import supabase from "./db/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 export const MainPage = () => {
@@ -31,17 +31,13 @@ export const MainPage = () => {
 
   const [role, setRole] = React.useState(""); // Tracks the selected role
 
-  //Sign in Functionality
+  // Sign In Functionality
   const handleSignInSubmit = async (e) => {
     e.preventDefault();
 
-    const role = e.target.role?.value;
-    const email = e.target.email?.value;
+    const role = e.target.role?.value?.trim().toLowerCase();
+    const email = e.target.email?.value?.trim();
     const password = e.target.password?.value;
-    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-    // Adding delay to avoid exceeding rate limits
-    await delay(3000); // Wait for 3 seconds before submitting the next request
 
     if (!role || !email || !password) {
       alert("Please fill in all fields.");
@@ -49,39 +45,48 @@ export const MainPage = () => {
     }
 
     try {
+      // Avoid rate limits
+      const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      await delay(3000);
+
+      // Authenticate user
       const { data: signInData, error: signInError } =
-        await supabase.auth.signInWithPassword({ email, password });
+        await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
       if (signInError?.message.includes("rate limit exceeded")) {
-        alert("Too many requests made. Please try again after a few minutes.");
+        alert("Too many requests. Please try again later.");
         return;
       }
 
-      // Check if the email is verified
+      if (signInError) {
+        alert("Invalid email or password.");
+        return;
+      }
+
+      // Fetch user's role from the database
       const { data: userData, error: fetchError } = await supabase
         .from("accounts")
         .select("role")
         .eq("email", email)
         .single();
 
-      if (fetchError || !userData) {
-        alert("Role mismatch or user not found.");
+      if (fetchError || !userData || userData.role.toLowerCase() !== role) {
+        alert("Invalid credentials or role mismatch.");
         return;
       }
 
-      if (userData.role !== role) {
-        alert(`Role mismatch: You cannot sign in as a ${role}.`);
-        return;
-      }
-
+      // Check if email is verified
       const { user } = signInData;
-
-      // Check if email is confirmed
       if (!user.email_confirmed_at) {
         alert("Please verify your email before signing in.");
         return;
       }
 
+      // Store role and redirect
+      localStorage.setItem("userRole", role);
       alert(
         `${role.charAt(0).toUpperCase() + role.slice(1)} login successful!`
       );
@@ -93,18 +98,19 @@ export const MainPage = () => {
     }
   };
 
-  //Sign up Functionality
+  // Sign Up Functionality
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
-    const role = e.target.role?.value;
-    const email = e.target.email?.value;
+    const role = e.target.role?.value?.trim().toLowerCase();
+    const email = e.target.email?.value?.trim();
     const password = e.target.password?.value;
     const confirmPassword = e.target["confirm-password"]?.value;
-    const name = e.target.name?.value;
+    const name = e.target.name?.value?.trim();
     const studentNumber =
-      role === "student" ? e.target["student-number"]?.value : null;
+      role === "student" ? e.target["student-number"]?.value?.trim() : null;
 
+    // Validate fields
     if (
       !role ||
       !email ||
@@ -116,16 +122,24 @@ export const MainPage = () => {
       return;
     }
 
+    if (!["teacher", "student"].includes(role)) {
+      alert(
+        "Invalid role selected. Please choose either 'Teacher' or 'Student'."
+      );
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
     try {
-      // Adding delay to avoid exceeding rate limits
+      // Avoid rate limits
       const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await delay(3000); // Wait for 3 seconds before submitting the next request
+      await delay(3000);
 
+      // Create user account
       const { data: signUpData, error: signUpError } =
         await supabase.auth.signUp({
           email,
@@ -134,7 +148,7 @@ export const MainPage = () => {
         });
 
       if (signUpError?.message.includes("rate limit exceeded")) {
-        alert("Too many requests made. Please try again after a few minutes.");
+        alert("Too many requests. Please try again later.");
         return;
       }
 
@@ -143,18 +157,22 @@ export const MainPage = () => {
         return;
       }
 
+      // Insert additional user details
       const { error: insertError } = await supabase
         .from("accounts")
-        .insert([{ email, fullname: name, role }]);
+        .insert([
+          { email, fullname: name, role, student_number: studentNumber },
+        ]);
 
       if (insertError) {
-        alert(insertError.message);
+        alert(`Error inserting data: ${insertError.message}`);
         return;
       }
 
+      // Success message
       alert("Account created successfully! Please verify your email.");
       e.target.reset();
-      navigate(role === "teacher" ? "/teachers" : "/students");
+      navigate("/");
     } catch (err) {
       alert(`Error: ${err.message}`);
     }

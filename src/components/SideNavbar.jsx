@@ -13,17 +13,17 @@ const menuItems = [
   {
     icon: <BiSolidDashboard size={24} />,
     text: "Dashboard",
-    href: "/dashboard",
+    href: "/teachers/dashboard",
   },
   {
     icon: <PiStudentDuotone size={24} />,
     text: "Student Information",
-    href: "/student-information",
+    href: "/teachers/student-information",
   },
   {
     icon: <HiOutlineClipboardDocumentList size={24} />,
     text: "Attendance",
-    href: "/attendance",
+    href: "/teachers/attendance",
   },
   {
     icon: <RiCalendarScheduleLine size={24} />,

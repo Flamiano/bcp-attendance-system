@@ -12,12 +12,12 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import supabase from "../supabaseClient"; 
+import supabase from "../db/supabaseClient"; 
 import bcpLogo from "../assets/bcp-logo.png"; 
 
 
 
-const Dashboard = () => {
+const TeacherDashboard = () => {
   document.title = "Dashboard";
 
   //Tab-Icon
@@ -277,4 +277,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default TeacherDashboard;

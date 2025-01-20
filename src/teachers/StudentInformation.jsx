@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import supabase from "../supabaseClient";
+import supabase from "../db/supabaseClient";
 import { IoSearchSharp } from "react-icons/io5"; //Search Icon
 import { CiCirclePlus } from "react-icons/ci"; //Add Icon
 import { IoMdPrint } from "react-icons/io"; //  Print Icon
