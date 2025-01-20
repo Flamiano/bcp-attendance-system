@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BiSolidDashboard } from "react-icons/bi";
-import { PiStudentDuotone } from "react-icons/pi";
-import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
+import { BiSolidDashboard } from "react-icons/bi"; // Dashboard
+import { PiStudentDuotone } from "react-icons/pi"; // Student Information
+import { HiOutlineClipboardDocumentList } from "react-icons/hi2"; // Attendance
 import { RiCalendarScheduleLine } from "react-icons/ri";
 import { TbReportSearch } from "react-icons/tb";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { RiMenuFoldFill, RiMenuUnfoldFill } from "react-icons/ri"; // Hide/Unhide Sidebar
+import { BiLogOutCircle } from "react-icons/bi"; // Logout Button
 
 const menuItems = [
   {
@@ -33,6 +34,11 @@ const menuItems = [
   { icon: <TbReportSearch size={24} />, text: "Reports", href: "/reports" },
   { icon: <FaMapMarkedAlt size={24} />, text: "Map", href: "/map" },
   { icon: <IoMdSettings size={24} />, text: "Settings", href: "/settings" },
+  {
+    icon: <BiLogOutCircle size={24} className="text-red-500 font-bold" />,
+    text: "Logout",
+    href: "/",
+  },
 ];
 
 export const SideNavbar = () => {
@@ -48,6 +54,12 @@ export const SideNavbar = () => {
   // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  //Logout Button
+  const handleLogout = () => {
+    localStorage.removeItem("userRole"); // Remove role from localStorage
+    navigate("/"); // Redirect to home page
   };
 
   return (
