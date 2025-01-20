@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import logo from "./assets/bcp-logo.png";
 import bg from "./assets/bcp-bg.jpg";
@@ -10,6 +10,14 @@ import { useNavigate } from "react-router-dom";
 
 export const MainPage = () => {
   document.title = "BCP-System";
+
+  //Tab-Icon
+  useEffect(() => {
+    const link = document.querySelector("link[rel='icon']");
+    if (link) {
+      link.href = logo;
+    }
+  }, []);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
