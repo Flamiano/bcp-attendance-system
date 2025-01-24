@@ -238,7 +238,7 @@ export const MainPage = () => {
 
   return (
     <div
-      className="min-h-screen flex flex-col overflow-hidden"
+      className="min-h-screen flex flex-col overflow-hidden bg-no-repeat bg-cover bg-center"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${bg})`,
       }}

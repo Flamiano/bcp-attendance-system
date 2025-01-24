@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { MainPage } from "./MainPage"; // Main page for sign-in/sign-up
 import { TeacherRouter } from "./teachers/TeacherRouter"; // Teacher router for teacher-specific routes
-import StudentDashboard from "./students/StudentDashboard"; // Student dashboard
+import StudentDashboard from './students/StudentDashboard';
 
 const App = () => {
   const [userRole, setUserRole] = useState(null);
@@ -41,7 +41,7 @@ const App = () => {
 
         {/* Student Dashboard Route */}
         <Route
-          path="/students/dashboard"
+          path="/students/*"
           element={
             isAuthenticated("student") ? (
               <StudentDashboard />
